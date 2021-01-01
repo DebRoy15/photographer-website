@@ -4,14 +4,23 @@ import clock from "../img/clock.svg";
 import diaph from "../img/diaphragm.svg";
 import money from "../img/money.svg";
 import teamwork from "../img/teamwork.svg";
-import home2 from "../img/home2.png";
+import home2 from "../img/home-2.jpg";
 import styled from "styled-components";
+import { scrollReveal } from "../animation";
 
 import { About, Description, Image } from "../styles";
+import { useScroll } from "./useScroll";
 
 const ServicesSection = () => {
+  const [element, controls] = useScroll();
+
   return (
-    <Services>
+    <Services
+      variants={scrollReveal}
+      animate={controls}
+      initial="hidden"
+      ref={element}
+    >
       <Description>
         <h2>
           High <span>quality</span> services
@@ -58,6 +67,7 @@ export default ServicesSection;
 
 const Services = styled(About)`
   /* align-items: flex-start; */
+
   h2 {
     padding-bottom: 5rem;
   }
@@ -70,6 +80,9 @@ const Services = styled(About)`
 const Cards = styled.div`
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 1300px) {
+    justify-content: center;
+  }
 `;
 const Card = styled.div`
   flex-basis: 14rem;
